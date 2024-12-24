@@ -46,7 +46,7 @@ python scripts/create_data.py
 
 Train the model using:
 
-python scripts/train.py
+python scripts/train_model.py
 
 Adjust hyperparameters in train.py as needed.
 ### Monitor Training with TensorBoard
