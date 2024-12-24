@@ -125,7 +125,8 @@ def main():
     input_type_dict = {
         'training_set': 'noise',
         'dev_set': 'sine',
-        'test_set': 'sine'
+        'test_set_interp': 'sine',
+        'test_set_extrap': 'sine'
     }
 
     for path, n_traj, dt_, T_tot_ in zip(paths, no_trajs, dts, T_tots):
