@@ -110,13 +110,15 @@ def main():
     intervals_dict = {
         'training_set': [1.0, 1.0, 1.0, np.pi, 1.0, 0.0, 0.1, 0.0],
         'dev_set': [0.0, 0.0, 0.0, np.pi, 0.0, 0.0, 0.0, 0.0],
-        'test_set': [0.0, 0.0, 0.0, np.pi, 0.0, 0.0, 0.0, 0.0]
+        'test_set_interp': [0.0, 0.0, 0.0, np.pi, 0.0, 0.0, 0.0, 0.0],
+        'test_set_extrap': [0.0, 0.0, 0.0, np.pi, 0.0, 0.0, 0.0, 0.0]
     }
     # more complex intervals for initial condition
     # intervals_dict = {
     #     'training_set': [1.0, 1.0, 1.0, np.pi, 1.0, 1.0, 1.0, 0.5],
     #     'dev_set': [1.0, 1.0, 1.0, np.pi, 1.0, 1.0, 1.0, 0.5],
-    #     'test_set': [0.0, 0.0, 0.0, np.pi, 0.0, 0.0, 0.0, 0.0]
+    #     'test_set_interp': [1.0, 1.0, 1.0, np.pi, 1.0, 1.0, 1.0, 0.5],
+    #     'test_set_extrap': [1.0, 1.0, 1.0, np.pi, 1.0, 1.0, 1.0, 0.5]
     # }
     
     #Define input types for each dataset
