@@ -34,21 +34,31 @@ A Physics-Informed Neural network with Control (PINC) for modeling the dynamics 
    ```bash
    git clone https://github.com/felsager/xyz-yaw.git
    cd xyz-yaw
-2. **Install dependencies using pip or conda**
+2. **Install dependencies using pip**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 ## Usage
+
 ### Generate Data
 
 Run the data generation script:
 
-python scripts/create_data.py
+```bash
+python data/create_data.py
+```
 
 ### Train the Model
 
 Train the model using:
 
-python scripts/train_model.py
+```bash
+python training/train_model.py
+```
 
-Adjust hyperparameters in train.py as needed.
+Adjust hyperparameters in training/train_model.py as needed.
 ### Monitor Training with TensorBoard
 
 Start TensorBoard to monitor training progress:
