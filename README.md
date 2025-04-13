@@ -28,10 +28,11 @@ This repository implements a Physics-Informed Neural network with Control (PINC)
 ├── src/              # Core source code (BlueROV model, parameters)
 ├── training/         # Model training scripts
 ├── .gitignore        # Git ignore rules
-├── LICENSE           # Project license file (MIT)
+├── LICENSE           # Project license file (Should be updated to GPLv3)
 ├── README.md         # This file
 └── requirements.txt  # Python dependencies
 ```
+*(Note: The LICENSE file itself should also be updated to reflect GPLv3 if it hasn't been already)*
 
 ## Installation
 
