@@ -8,7 +8,7 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 from tqdm import trange
 from torch.utils.tensorboard import SummaryWriter
 
-from model_utility import (
+from models.model_utility import (
     get_data_sets,
     DNN,
     convert_input_data,
@@ -91,6 +91,7 @@ def main():
                 optimizer,
                 epoch,
                 device,
+                writer, # Added missing writer argument
                 pinn=pinn,
                 rollout=rollout,
                 noise_level=noise_level
@@ -100,7 +101,8 @@ def main():
                 model,
                 dev_dataloader,
                 epoch,
-                device
+                device,
+                writer # Added missing writer argument
             )
             
             # Update smoothed validation loss

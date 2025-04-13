@@ -32,8 +32,8 @@ A Physics-Informed Neural network with Control (PINC) for modeling the dynamics 
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/felsager/xyz-yaw.git
-   cd xyz-yaw
+   git clone https://github.com/eivacom/pinc-xyz-yaw
+   cd pinc-xyz-yaw
 2. **Install dependencies using pip**
 
    ```bash

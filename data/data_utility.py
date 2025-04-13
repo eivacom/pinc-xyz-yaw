@@ -1,4 +1,54 @@
 import numpy as np
+import torch
+import os
+from torch.utils.data import Dataset
+
+class TrajectoryDataset(Dataset):
+    """
+    Custom PyTorch Dataset for loading trajectory data.
+    Assumes data is stored in .pt files (X.pt, U.pt, t_coll.pt, t.pt)
+    within the specified directory (data_dir).
+    """
+    def __init__(self, data_dir):
+        self.data_dir = data_dir
+        try:
+            self.X = torch.load(os.path.join(data_dir, 'X.pt'))
+            self.U = torch.load(os.path.join(data_dir, 'U.pt'))
+            self.t_coll = torch.load(os.path.join(data_dir, 't_coll.pt'))
+            # Load time vector - assuming it's the same for all trajectories in the set
+            # If time varies per trajectory, this needs adjustment.
+            self.time = torch.load(os.path.join(data_dir, 't.pt'))
+            # Ensure time has the correct shape [N_traj, N_seq, 1] if needed by model_utility
+            # Assuming time is [N_seq], we might need to expand it later or handle in __getitem__
+            # For now, let's assume model_utility functions can handle a single time vector or adapt.
+            # A common pattern is to repeat the time vector for each batch item.
+            # Let's reshape t_coll to match X and U's first dimension (N_traj)
+            # The create_data script saves t_coll as [N_traj, N, N_coll_tot]
+            # and time as [N,]. Let's adjust time to be [N_traj, N, 1]
+
+            N_traj = self.X.shape[0]
+            N_seq = self.X.shape[1]
+            # Reshape time: [N_seq] -> [1, N_seq, 1] -> [N_traj, N_seq, 1]
+            self.time = self.time.unsqueeze(0).unsqueeze(-1).expand(N_traj, -1, -1)
+
+            # Basic validation
+            assert self.X.shape[0] == self.U.shape[0] == self.t_coll.shape[0] == self.time.shape[0], "Mismatch in number of trajectories"
+            assert self.X.shape[1] == self.U.shape[1] == self.t_coll.shape[1] == self.time.shape[1], "Mismatch in sequence length"
+
+        except FileNotFoundError as e:
+            raise FileNotFoundError(f"Error loading data from {data_dir}. Missing file: {e.filename}")
+        except Exception as e:
+            raise RuntimeError(f"Error loading or processing data from {data_dir}: {e}")
+
+    def __len__(self):
+        """Returns the number of trajectories in the dataset."""
+        return self.X.shape[0]
+
+    def __getitem__(self, idx):
+        """Returns a single trajectory tuple (X, U, t_coll, time)."""
+        # Note: time returned here is shaped [N_seq, 1] for the specific trajectory idx
+        return self.X[idx], self.U[idx], self.t_coll[idx], self.time[idx]
+
 
 def random_input(t, N_u, input_type='noise'):
     """

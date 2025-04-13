@@ -4,17 +4,19 @@ import torch
 import control as ct
 from scipy.stats.qmc import LatinHypercube
 
-from bluerov import bluerov
-from data_utility import random_input, random_x0
+from src.bluerov import bluerov
+from data.data_utility import random_input, random_x0
 
-# Set seed to ensure reproducibility 
+# Set seed to ensure reproducibility
 np.random.seed(0)
 
 # Define the ROV system globally
-rov_sys = ct.nlsys(
+# Using NonlinearIOSystem instead of nlsys
+rov_sys = ct.NonlinearIOSystem(
     bluerov, None, inputs=('X', 'Y', 'Z', 'M_z'),
     outputs=('x', 'y', 'z', 'psi', 'u', 'v', 'w', 'r'),
-    states=('x', 'y', 'z', 'psi', 'u', 'v', 'w', 'r')
+    states=('x', 'y', 'z', 'psi', 'u', 'v', 'w', 'r'),
+    name='bluerov_system' # Name is often required or good practice
 )
 
 def create_data(
