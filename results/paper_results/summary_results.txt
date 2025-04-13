@@ -1,0 +1,5 @@
+Model: models/noisy_input_rotated_not_config_yaw_interval_increased_dev_data_fixed_2_best_dev_l_993
+Overall Single-Step MSE: 0.000007
+Rollout Loss (10 steps, dB): -3.76
+Physics Loss (dB): -2.87
+Average IVP (e_thr=0.05): 1.6966 s

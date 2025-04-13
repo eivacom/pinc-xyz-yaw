@@ -7,10 +7,14 @@
 **Recent Changes:**
 - Created initial memory bank files.
 - Converted `notebooks/pi_dnn.ipynb` to `scripts/pi_dnn.py`.
-- Analyzed `scripts/pi_dnn.py`: It's an evaluation and visualization script for a pre-trained PINN model, comparing predictions (single-step and rollout) against development data.
+- Performed detailed analysis of `scripts/pi_dnn.py`: Confirmed it loads a specific pre-trained PINN (`models/pinn_no_rollout_rotated_less_layers_0`), loads development data, and performs both single-step and rollout predictions. It generates various comparison plots (MSE, trajectories, individual states) and calculates losses. Updated `systemPatterns.md` accordingly.
 
 **Next Steps:**
-- Update `progress.md` and `systemPatterns.md` with information about `scripts/pi_dnn.py`.
+- Update `progress.md` with detailed information about `scripts/pi_dnn.py`.
+- Modify `scripts/pi_dnn.py` to save its output plots and potentially results data into a new directory: `results/paper_results/`.
+- Execute the modified `scripts/pi_dnn.py` to generate the results.
+- Stage and commit all changes (script modifications, memory bank updates, new results).
+- Push changes to GitHub.
 - Decide whether to delete the original `notebooks/pi_dnn.ipynb`.
 - Continue analyzing the project structure for reorganization.
 
