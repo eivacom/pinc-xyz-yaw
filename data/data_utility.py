@@ -50,21 +50,24 @@ class TrajectoryDataset(Dataset):
         return self.X[idx], self.U[idx], self.t_coll[idx], self.time[idx]
 
 
-def random_input(t, N_u, input_type='noise'):
+def random_input(t, N_u, input_type='noise', params=None):
     """
-    Generates random input signals for the system.
-    
+    Generates input signals for the system based on the specified type.
+
     Args:
         t (ndarray): Time array of shape (N,).
         N_u (int): Number of control inputs.
-        input_type (str): Type of input signal ('noise', 'sine', 'noise_x', 'sine_x').
-        
+        input_type (str): Type of input signal ('noise', 'sine', 'noise_x', 'sine_x', 'line', 'circle', 'figure8').
+        params (dict, optional): Parameters for specific trajectories (e.g., speed, radius). Defaults to None.
+
     Returns:
         U (ndarray): Input signal array of shape (N, N_u).
     """
     N = len(t)
     U = np.zeros((N, N_u))
-    
+    if params is None:
+        params = {}
+
     if input_type in ['noise', 'noise_x']:
         # Generate noise input
         u_signs = np.random.choice([-1, 1], size=N_u)
@@ -104,10 +107,30 @@ def random_input(t, N_u, input_type='noise'):
             U += U_sine
         elif input_type == 'sine_x':
             U[:, 0] += U_sine[:, 0]
-    
+
+    elif input_type == 'line':
+        # Constant forward thrust for a straight line
+        forward_thrust = params.get('forward_thrust', 5.0) # Default thrust
+        U[:, 0] = forward_thrust
+
+    elif input_type == 'circle':
+        # Constant forward thrust and constant yaw moment for a circle
+        forward_thrust = params.get('forward_thrust', 5.0)
+        yaw_moment = params.get('yaw_moment', 0.5) # Default moment
+        U[:, 0] = forward_thrust
+        U[:, 3] = yaw_moment
+
+    elif input_type == 'figure8':
+        # Constant forward thrust and sinusoidal yaw moment for a figure 8
+        forward_thrust = params.get('forward_thrust', 5.0)
+        yaw_amplitude = params.get('yaw_amplitude', 1.0) # Default amplitude
+        yaw_frequency = params.get('yaw_frequency', 0.2) # Default frequency (adjust based on T_tot)
+        U[:, 0] = forward_thrust
+        U[:, 3] = yaw_amplitude * np.sin(2 * np.pi * yaw_frequency * t)
+
     else:
-        raise ValueError(f"Invalid input_type '{input_type}'. Must be 'noise', 'sine', 'noise_x', or 'sine_x'.")
-    
+        raise ValueError(f"Invalid input_type '{input_type}'. Must be 'noise', 'sine', 'noise_x', 'sine_x', 'line', 'circle', or 'figure8'.")
+
     return U
 
 def random_x0(intervals):

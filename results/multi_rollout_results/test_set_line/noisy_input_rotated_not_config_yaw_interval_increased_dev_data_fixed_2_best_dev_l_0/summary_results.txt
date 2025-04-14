@@ -1,0 +1,4 @@
+Model: models/noisy_input_rotated_not_config_yaw_interval_increased_dev_data_fixed_2_best_dev_l_0
+Dataset: test_set_line
+Average IVP (e_thr=0.05): 0.0000 s
+Final Position Error: 3.9045 m

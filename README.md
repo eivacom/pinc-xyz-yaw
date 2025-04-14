@@ -72,7 +72,7 @@ This repository implements a Physics-Informed Neural network with Control (PINC)
     *   `matplotlib`: Plotting and visualization
     *   `tqdm`: Progress bars
     *   `control`: Control system analysis library
-    *   `conflictfree`: (Purpose needs clarification - likely related to specific logic)
+    *   `conflictfree`: ConFig Paper
 
 ## Usage
 
@@ -128,6 +128,11 @@ Use the scripts provided to evaluate performance and visualize results:
     python scripts/pi_dnn.py # (May need adjustments to load specific models/data)
     ```
 *(Note: You might need to modify these scripts to point to the specific model checkpoints you want to analyze, typically found in `models/`)*
+
+## References / Acknowledgements
+
+*   **This Repository:** [https://github.com/eivacom/pinc-xyz-yaw](https://github.com/eivacom/pinc-xyz-yaw)
+*   **ConFIG (Conflict-Free Gradient Combination):** The gradient combination techniques explored in this project are inspired by or utilize concepts from the ConFIG library. [https://github.com/tum-pbs/ConFIG](https://github.com/tum-pbs/ConFIG)
 
 ## License
 

@@ -20,7 +20,7 @@ rov_sys = ct.NonlinearIOSystem(
 )
 
 def create_data(
-    N_traj, input_type, T_tot=5.2, dt=0.08, N_x=9, N_u=4,
+    N_traj, input_type, params=None, T_tot=5.2, dt=0.08, N_x=9, N_u=4,
     N_coll=0, fixed_coll_points=None, intervals=None
 ):
     """
@@ -28,7 +28,8 @@ def create_data(
 
     Args:
         N_traj (int): Number of trajectories to generate.
-        input_type (str): Type of input ('noise', 'sine', etc.).
+        input_type (str): Type of input ('noise', 'sine', 'line', 'circle', 'figure8', etc.).
+        params (dict, optional): Parameters for specific trajectories. Defaults to None.
         T_tot (float): Total time of trajectory.
         dt (float): Time step.
         N_x (int): Number of state variables.
@@ -67,12 +68,17 @@ def create_data(
         # Generate random initial state
         x_0 = random_x0(intervals)
 
-        # Generate random input sequence
-        U[n, :] = random_input(t, N_u, input_type)
-        # Adjust control inputs
-        U[n, :, 1] *= 0.1   # Scale Y input
-        U[n, :, 2] = 5 * np.abs(U[n, :, 2])  # Only diving (Z input positive)
-        U[n, :, -1] *= 0.05  # Scale M_z (yaw) input
+        # Generate input sequence based on type and params
+        U[n, :] = random_input(t, N_u, input_type, params=params)
+
+        # Apply general adjustments ONLY if not a specific trajectory type
+        # (Assume specific types handle their own scaling/logic)
+        if input_type not in ['line', 'circle', 'figure8']:
+            U[n, :, 1] *= 0.1   # Scale Y input
+            U[n, :, 2] = 5 * np.abs(U[n, :, 2])  # Only diving (Z input positive)
+            U[n, :, -1] *= 0.05  # Scale M_z (yaw) input
+        # Note: For line/circle/figure8, the random_input function now sets U directly.
+        # We might need to refine this logic if those trajectories also need scaling.
 
         # Simulate the system
         _, x = ct.input_output_response(
@@ -128,19 +134,48 @@ def main():
         'training_set': 'noise',
         'dev_set': 'sine',
         'test_set_interp': 'sine',
-        'test_set_extrap': 'sine'
+        'test_set_extrap': 'sine',
+        # Add new trajectory types
+        'test_set_line': 'line',
+        'test_set_circle': 'circle',
+        'test_set_figure8': 'figure8'
     }
 
+    # Parameters for specific trajectories (using defaults from data_utility for now)
+    trajectory_params = {
+        'line': {'forward_thrust': 5.0},
+        'circle': {'forward_thrust': 5.0, 'yaw_moment': 0.5},
+        'figure8': {'forward_thrust': 5.0, 'yaw_amplitude': 1.0, 'yaw_frequency': 0.2} # Adjust freq based on T_tot if needed
+    }
+
+    # Add new paths and parameters for specific trajectories
+    paths.extend(['test_set_line', 'test_set_circle', 'test_set_figure8'])
+    no_trajs.extend([10, 10, 10]) # Generate fewer trajectories for these specific tests
+    dts.extend([dt, dt, dt]) # Use default dt
+    T_tots.extend([T_tot, T_tot, T_tot]) # Use default T_tot
+
+    # Use zero intervals for deterministic starting points for new trajectories
+    intervals_dict['test_set_line'] = [0.0] * 8
+    intervals_dict['test_set_circle'] = [0.0] * 8
+    intervals_dict['test_set_figure8'] = [0.0] * 8
+
+
     for path, n_traj, dt_, T_tot_ in zip(paths, no_trajs, dts, T_tots):
+        print(f"\n--- Generating dataset: {path} ---")
         if not os.path.exists(path):
             os.mkdir(path)
+            print(f"Created directory: {path}")
 
-        intervals = intervals_dict.get(path, [0.0] * 8)
-        input_type = input_type_dict.get(path, 'sine')
+        intervals = intervals_dict.get(path, [0.0] * 8) # Default to zero intervals if not specified
+        input_type = input_type_dict.get(path, 'sine') # Default to sine if not specified
+        params = trajectory_params.get(input_type, None) # Get specific params if applicable
+
+        print(f"Parameters: N_traj={n_traj}, input_type='{input_type}', T_tot={T_tot_}, dt={dt_}, intervals={intervals}, params={params}")
 
         X, U, t, t_coll = create_data(
             N_traj=n_traj,
             input_type=input_type,
+            params=params, # Pass trajectory specific parameters
             T_tot=T_tot_,
             dt=dt_,
             N_x=N_x,

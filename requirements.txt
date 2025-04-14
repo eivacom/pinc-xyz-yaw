@@ -6,3 +6,4 @@ control
 scipy
 matplotlib
 conflictfree
+pytest
