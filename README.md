@@ -72,7 +72,7 @@ This repository implements a Physics-Informed Neural network with Control (PINC)
     *   `matplotlib`: Plotting and visualization
     *   `tqdm`: Progress bars
     *   `control`: Control system analysis library
-    *   `conflictfree`: ConFig Paper
+    *   `conflictfree`: ConFig method
 
 ## Usage
 

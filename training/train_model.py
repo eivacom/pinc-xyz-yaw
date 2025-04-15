@@ -38,6 +38,7 @@ pinn = True
 rollout = True
 activation = Softplus
 noise_level = 0.0 # std of noise level
+gradient_method = 'config' # 'normalize', 'direct', or 'config'
 
 def main():
     # Load data
@@ -77,7 +78,9 @@ def main():
     # Create directory for saving models
     model_dir = "models"
     os.makedirs(model_dir, exist_ok=True)
-    model_path = os.path.join(model_dir, f"{exp_name}_{tb_idx}")
+    # Include gradient method in the base filename
+    base_model_name = f"{exp_name}_{gradient_method}_{tb_idx}" 
+    model_path = os.path.join(model_dir, base_model_name)
 
     l_dev_best = np.float32('inf')
     l_dev_smooth = 1.0  # Initial value of smoothed l_dev
@@ -91,10 +94,11 @@ def main():
                 optimizer,
                 epoch,
                 device,
-                writer, # Added missing writer argument
+                writer,
                 pinn=pinn,
                 rollout=rollout,
-                noise_level=noise_level
+                noise_level=noise_level,
+                gradient_method=gradient_method # Pass gradient method
             )
             # Validation step
             l_dev = test_dev_set(
@@ -110,9 +114,10 @@ def main():
             
             # Save the best model
             if l_dev < l_dev_best:
+                # Include gradient method in the best model filename
                 model_path_best = os.path.join(
                     model_dir,
-                    f"{exp_name}_{tb_idx}_best_dev_l_{epoch}"
+                    f"{base_model_name}_best_dev_l_{epoch}" 
                 )
                 torch.save(model.state_dict(), model_path_best)
                 l_dev_best = l_dev
@@ -141,6 +146,7 @@ def main():
                 "Hidden layers size": f"{N_h}",
                 "Activation function": f"{activation.__name__}",
                 "Noise level": noise_level,
+                "Gradient Method": gradient_method,
             },
             {
                 "final_train_loss": l_train,
