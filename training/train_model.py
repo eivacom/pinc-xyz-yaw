@@ -1,17 +1,6 @@
 import os
-import sys
+import sys # Keep sys import if needed elsewhere, otherwise remove
 import time
-
-# --- Start Path Modification ---
-# Get the directory containing this script (training/)
-script_dir = os.path.dirname(os.path.abspath(__file__))
-# Get the parent directory (project root)
-project_root = os.path.dirname(script_dir)
-# Add the project root to the start of the Python path
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
-# --- End Path Modification ---
-
 import torch
 import numpy as np
 from torch.nn import Softplus
@@ -20,7 +9,8 @@ from torch.optim.lr_scheduler import ReduceLROnPlateau
 from tqdm import trange
 from torch.utils.tensorboard import SummaryWriter
 
-from models.model_utility import (
+# Use relative import now that training/ and models/ are packages
+from ..models.model_utility import (
     get_data_sets,
     DNN,
     convert_input_data,
