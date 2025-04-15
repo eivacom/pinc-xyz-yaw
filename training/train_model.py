@@ -1,17 +1,6 @@
 import os
-import sys # Add sys import
+import sys # Keep sys import if needed elsewhere, otherwise remove
 import time
-
-# Add project root to sys.path
-# This allows the script to find modules in directories like 'models' and 'src'
-script_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.dirname(script_dir)
-# Add both script directory and project root to sys.path
-if script_dir not in sys.path:
-    sys.path.insert(0, script_dir)
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
-
 import torch
 import numpy as np
 from torch.nn import Softplus
