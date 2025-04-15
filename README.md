@@ -6,7 +6,7 @@ This repository implements a Physics-Informed Neural network with Control (PINC)
 
 
 > **📄 Accepted Paper @ [IJCNN 2025](https://2025.ijcnn.org/)**  
-> **Title:** *Modelling of Underwater Vehicles using Physics-Informed Neural Networks*
+> **Title:** *Modelling of Underwater Vehicles using Physics-Informed Neural Networks with Control*
 
 
 ## Key Features
