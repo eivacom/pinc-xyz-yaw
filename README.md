@@ -4,15 +4,18 @@
 
 This repository implements a Physics-Informed Neural network with Control (PINC) approach to model and simulate the dynamics of a BlueROV2 underwater vehicle using PyTorch. It leverages the power of neural networks while incorporating physical principles to achieve more accurate and robust dynamic models.
 
+
+> **📄 Accepted Paper @ IJCNN 2025**  
+> **Title:** *Modelling of Underwater Vehicles using Physics-Informed Neural Networks*
+
+
 ## Key Features
 
 *   **BlueROV Dynamic Simulation**: Core simulation logic for the BlueROV2 vehicle implemented in `src/bluerov.py` and `src/bluerov_torch.py`.
 *   **Synthetic Data Generation**: Scripts (`data/create_data_2.py`) to generate customizable trajectory datasets for training and evaluation.
 *   **PINC Model Implementation**: Neural network models designed to learn system dynamics, potentially incorporating physical laws directly into the loss function (PINN) or network structure.
 *   **Model Training Pipeline**: Robust training script (`training/train_model.py`) using PyTorch, with support for hyperparameter tuning.
-*   **Model Evaluation & Analysis**: Scripts for evaluating model performance (`scripts/evaluate_model.py`), analyzing rollout predictions (`scripts/analyze_rollout.py`), and visualizing results (`scripts/pi_dnn.py`).
-*   **TensorBoard Integration**: Monitor training progress, loss curves, and other metrics in real-time.
-*   **Modular Structure**: Code organized into distinct directories for source logic (`src`), data handling (`data`), model definitions (`models`), training (`training`), evaluation scripts (`scripts`), results (`results`), and project documentation (`memory-bank`).
+
 
 ## Project Structure
 
