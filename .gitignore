@@ -3,7 +3,10 @@ slurm.sh
 runs/*
 !runs/.gitignore
 
+# Ignore model weight files, but not the package init or utility script
 models/*
+!models/__init__.py
+!models/model_utility.py
 !models/.gitignore
 
 training_set
