@@ -35,7 +35,6 @@ This repository implements a Physics-Informed Neural network with Control (PINC)
 ├── README.md         # This file
 └── requirements.txt  # Python dependencies
 ```
-*(Note: The LICENSE file itself should also be updated to reflect GPLv3 if it hasn't been already)*
 
 ## Installation
 
@@ -86,7 +85,6 @@ Run the data generation script. You might need to adjust parameters within the s
 ```bash
 python data/create_data_2.py
 ```
-*(Note: `data/create_data.py` also exists, ensure you use the intended script)*
 
 ### 2. Train the Model
 
