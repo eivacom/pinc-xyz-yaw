@@ -2,7 +2,7 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-This repository implements a Physics-Informed Neural network with Control (PINC) approach to model and simulate the dynamics of a BlueROV2 underwater vehicle using PyTorch. It leverages the power of neural networks while incorporating physical principles to achieve more accurate and robust dynamic models.
+This repository implements a Physics-Informed Neural network with Control (PINC) approach to model and simulate the dynamics of a BlueROV2 underwater vehicle using PyTorch. It leverages the power of neural networks while incorporating physical principles to achieve data effecient neural dynamic models.
 
 
 > **📄 Accepted Paper @ [IJCNN 2025](https://2025.ijcnn.org/)**  
