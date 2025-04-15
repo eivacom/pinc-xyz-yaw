@@ -1,12 +1,13 @@
 import os
-import sys
+import sys # Add sys import
 import time
 
-# Add the current working directory to sys.path
-# This assumes the script is run from the project root directory
-cwd = os.getcwd()
-if cwd not in sys.path:
-    sys.path.insert(0, cwd)
+# Add project root to sys.path
+# This allows the script to find modules in directories like 'models' and 'src'
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(script_dir)
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
 import torch
 import numpy as np
