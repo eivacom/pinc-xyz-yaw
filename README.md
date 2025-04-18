@@ -13,7 +13,7 @@ This repository implements a Physics-Informed Neural network with Control (PINC)
 
 *   **BlueROV Dynamic Simulation**: Core simulation logic for the BlueROV2 vehicle implemented in `src/bluerov.py` and `src/bluerov_torch.py`.
 *   **Synthetic Data Generation**: Scripts (`data/create_data_2.py`) to generate customizable trajectory datasets for training and evaluation.
-*   **PINC Model Implementation**: Neural network models designed to learn system dynamics, potentially incorporating physical laws directly into the loss function (PINN) or network structure.
+*   **PINC Model Implementation**: Neural network models designed to learn system dynamics, potentially incorporating physical laws directly into the loss function (PINN) or network structure. See [Model Explanation](model_explanation.md) for details on the architecture and loss functions.
 *   **Model Training Pipeline**: Robust training script (`training/train_model.py`) using PyTorch, with support for hyperparameter tuning.
 
 

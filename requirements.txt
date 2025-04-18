@@ -8,3 +8,4 @@ matplotlib
 conflictfree
 pytest
 tensorboard
+numba
