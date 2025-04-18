@@ -2,8 +2,8 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-<img src="https://www.python.org/static/community_logos/python-logo-v3-tm-1line.svg" alt="Python" width="100"/>
-<img src="https://pytorch.org/assets/images/pytorch-logo-dark.png" alt="PyTorch" width="100"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-white.svg" alt="Python" width="100"/>
+<img src="https://pytorch.org/assets/images/pytorch-logo-white.svg" alt="PyTorch" width="100"/>
 ![Tests Passed](https://img.shields.io/badge/tests-passed-brightgreen)
 
 
