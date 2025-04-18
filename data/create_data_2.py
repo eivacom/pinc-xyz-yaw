@@ -4,8 +4,8 @@ import torch
 import control as ct
 from scipy.stats.qmc import LatinHypercube
 
-from pinc_xyz_yaw.src.bluerov import bluerov
-from pinc_xyz_yaw.data.data_utility import random_input, random_x0
+from ..src.bluerov import bluerov
+from .data_utility import random_input, random_x0
 
 # Set seed to ensure reproducibility
 np.random.seed(0)
