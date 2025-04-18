@@ -10,7 +10,7 @@ from tqdm import trange
 from torch.utils.tensorboard import SummaryWriter
 
 # Use relative import now that training/ and models/ are packages
-from ..models.model_utility import (
+from pinc_xyz_yaw.models.model_utility import (
     get_data_sets,
     DNN,
     convert_input_data,
