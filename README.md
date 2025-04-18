@@ -137,7 +137,6 @@ Use the scripts provided to evaluate performance and visualize results:
 
 ## References / Acknowledgements
 
-*   **This Repository:** [https://github.com/eivacom/pinc-xyz-yaw](https://github.com/eivacom/pinc-xyz-yaw)
 *   **ConFIG (Conflict-Free Gradient Combination):** The gradient combination techniques explored in this project are inspired by or utilize concepts from the ConFIG library. [https://github.com/tum-pbs/ConFIG](https://github.com/tum-pbs/ConFIG)
 
 ## License
