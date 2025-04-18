@@ -79,7 +79,7 @@ This repository implements a Physics-Informed Neural network with Control (PINC)
     *   `matplotlib`: Plotting and visualization
     *   `tqdm`: Progress bars
     *   `control`: Control system analysis library
-    *   `conflictfree`: ConFig method
+    *   `conflictfree`: ConFig 
 
 ## Usage
 
@@ -137,7 +137,7 @@ Use the scripts provided to evaluate performance and visualize results:
 
 ## References / Acknowledgements
 
-*   **ConFIG (Conflict-Free Gradient Combination):** The gradient combination techniques explored in this project are inspired by or utilize concepts from the ConFIG library. [https://github.com/tum-pbs/ConFIG](https://github.com/tum-pbs/ConFIG)
+*   **ConFIG (Conflict-Free Gradient Combination):**  [https://github.com/tum-pbs/ConFIG](https://github.com/tum-pbs/ConFIG)
 
 ## License
 
