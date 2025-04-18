@@ -1,15 +1,14 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 import os
 import numpy as np
 import torch
 import control as ct
 from scipy.stats.qmc import LatinHypercube
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from ..src.bluerov import bluerov
-from .data_utility import random_input, random_x0
+from src.bluerov import bluerov
+from data.data_utility import random_input, random_x0
 
 # Set seed to ensure reproducibility
 np.random.seed(0)
