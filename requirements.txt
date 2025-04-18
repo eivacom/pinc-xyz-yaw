@@ -6,3 +6,6 @@ control
 scipy
 matplotlib
 conflictfree
+pytest
+tensorboard
+numba

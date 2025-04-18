@@ -1,4 +1,9 @@
+import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+import os
+import sys # Keep sys import if needed elsewhere, otherwise remove
 import time
 import torch
 import numpy as np
@@ -7,8 +12,10 @@ from torch.optim import AdamW
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from tqdm import trange
 from torch.utils.tensorboard import SummaryWriter
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from model_utility import (
+# Use absolute import now that root is in sys.path
+from models.model_utility import (
     get_data_sets,
     DNN,
     convert_input_data,
@@ -38,6 +45,7 @@ pinn = True
 rollout = True
 activation = Softplus
 noise_level = 0.0 # std of noise level
+gradient_method = 'config' # 'normalize', 'direct', or 'config'
 
 def main():
     # Load data
@@ -77,7 +85,9 @@ def main():
     # Create directory for saving models
     model_dir = "models"
     os.makedirs(model_dir, exist_ok=True)
-    model_path = os.path.join(model_dir, f"{exp_name}_{tb_idx}")
+    # Include gradient method in the base filename
+    base_model_name = f"{exp_name}_{gradient_method}_{tb_idx}" 
+    model_path = os.path.join(model_dir, base_model_name)
 
     l_dev_best = np.float32('inf')
     l_dev_smooth = 1.0  # Initial value of smoothed l_dev
@@ -91,16 +101,19 @@ def main():
                 optimizer,
                 epoch,
                 device,
+                writer,
                 pinn=pinn,
                 rollout=rollout,
-                noise_level=noise_level
+                noise_level=noise_level,
+                gradient_method=gradient_method # Pass gradient method
             )
             # Validation step
             l_dev = test_dev_set(
                 model,
                 dev_dataloader,
                 epoch,
-                device
+                device,
+                writer # Added missing writer argument
             )
             
             # Update smoothed validation loss
@@ -108,9 +121,10 @@ def main():
             
             # Save the best model
             if l_dev < l_dev_best:
+                # Include gradient method in the best model filename
                 model_path_best = os.path.join(
                     model_dir,
-                    f"{exp_name}_{tb_idx}_best_dev_l_{epoch}"
+                    f"{base_model_name}_best_dev_l_{epoch}" 
                 )
                 torch.save(model.state_dict(), model_path_best)
                 l_dev_best = l_dev
@@ -139,6 +153,7 @@ def main():
                 "Hidden layers size": f"{N_h}",
                 "Activation function": f"{activation.__name__}",
                 "Noise level": noise_level,
+                "Gradient Method": gradient_method,
             },
             {
                 "final_train_loss": l_train,

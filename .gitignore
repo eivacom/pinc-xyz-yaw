@@ -3,7 +3,9 @@ slurm.sh
 runs/*
 !runs/.gitignore
 
-models/*
+# Ignore model weight files, but not the package init or utility script
+!models/__init__.py
+!models/model_utility.py
 !models/.gitignore
 
 training_set
@@ -29,3 +31,5 @@ performance_tests.py
 tensorboard_csv_outputs
 
 __pycache__
+models/__pycache__
+memory-bank/

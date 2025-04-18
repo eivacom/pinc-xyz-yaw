@@ -1,7 +1,7 @@
 import numpy as np
 from numpy import cos, sin, pi, abs
 from numba import njit
-from parameters import (
+from src.parameters import (
     m, X_ud, Y_vd, Z_wd, I_zz, N_rd,
     X_u, X_uc, Y_v, Y_vc, Z_w, Z_wc,
     N_r, N_rc, g, F_bouy
