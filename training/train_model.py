@@ -8,7 +8,7 @@ from torch.optim import AdamW
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 from tqdm import trange
 from torch.utils.tensorboard import SummaryWriter
-
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # Use relative import now that training/ and models/ are packages
 from pinc_xyz_yaw.models.model_utility import (
     get_data_sets,
