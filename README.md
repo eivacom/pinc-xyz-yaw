@@ -23,7 +23,7 @@ This repository implements a Physics-Informed Neural network with Control (PINC)
 .
 ├── data/             # Scripts for data generation and utility functions
 ├── memory-bank/      # Project documentation (context, progress, etc.)
-├── models/           # Saved model checkpoints and utility functions. Contains trained neural network models.
+├── models/           # Saved model checkpoints and utility functions. Contains trained neural network models. These models are the result of training the PINC architecture on the BlueROV dynamics.
 ├── notebooks/        # Jupyter notebooks for experimentation (potentially outdated)
 ├── results/          # Saved evaluation results, plots, summaries
 ├── runs/             # TensorBoard log files
